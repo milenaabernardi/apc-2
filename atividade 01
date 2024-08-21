@@ -1,1 +1,41 @@
+Exercícios
+A
+1. #include <iostream>
+using namespace std;
 
+int numero;
+
+void multiploQuatro(){
+    if (numero%4==0){
+        cout << "o numero selecionado e multiplo de 4." << endl;
+    }
+    else {
+        cout << "o numero selecionado nao e multiplo de 4." << endl;
+    }
+}
+
+int main(){
+    cin >> numero;
+    multiploQuatro();
+}
+
+2. #include <iostream>
+using namespace std;
+
+int numero;
+
+void parImpar(){
+    if (numero%2==0){
+        cout << "o numero e par" << endl;
+    }
+    else {
+        cout << "o numero e impar" << endl;
+    }
+}
+
+int main(){
+    cin >> numero;
+    parImpar();
+}
+
+3. 
