@@ -38,4 +38,235 @@ int main(){
     parImpar();
 }
 
-3. 
+3. #include <iostream>
+using namespace std;
+
+void somaIntervalo(){
+    int num1, num2;
+
+    cout << "digite o primeiro numero inteiro positivo: ";
+    cin >> num1;
+    cout << "digite o segundo numero inteiro positivo: ";
+    cin >> num2;
+
+    if (num1 > num2){
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }
+
+    int soma = 0;
+    cout << "o intervalo e: ";
+    for (int i = num1; i <= num2; i++){
+        soma += i;
+        cout << i;
+        if (i != num2){
+            cout << " + ";
+        }
+    }
+
+    cout << endl;
+    cout << "resultado: " << soma << endl;
+}
+
+int main(){
+    somaIntervalo();
+
+    return 0;
+}
+
+4. #include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+float raio, esfera, pi= M_PI;
+
+void volume(){
+    esfera = 4 * pi * (raio*raio*raio)/3;
+    cout << "volume da esfera: " << fixed << setprecision(2)<< esfera << endl;
+}
+
+int main (){
+    cin >> raio;
+    volume();
+}
+
+5. #include <iostream>
+using namespace std;
+
+int numero;
+
+void fatorial(){
+    for(int i=numero-1; i>1; i--){
+        numero=numero*i;
+    }
+    cout << "fatorial: " << numero << endl;
+}
+
+int main(){
+    cin >> numero;
+    fatorial();
+}
+
+6. #include <iostream> 
+using namespace std;
+
+int base, expoente, resultado=1;
+
+void potencia(){
+    while(expoente>0){
+        resultado*=base;
+        expoente--;
+    }
+    cout << resultado << endl;
+}
+
+int main(){
+    cin >> base;
+    cin >> expoente;
+    potencia();
+}
+
+B.
+1. #include <iostream>
+using namespace std;
+
+int multiploQuatro(int numero){
+    return numero%4;
+}
+
+int main(){
+    int n;
+    cin >> n;
+
+    if (multiploQuatro(n)==0){
+        cout << "o numero selecionado e multiplo de 4." << endl;
+    }
+    else {
+        cout << "o numero selecionado nao e multiplo de 4." << endl;
+    }
+}
+
+2. #include <iostream>
+using namespace std;
+
+int parImpar(int numero){
+    return numero%2;
+}
+
+int main(){
+    int n;
+    cin >> n;
+    if (parImpar(n)==0){
+        cout << "o numero e par" << endl;
+    }
+    else {
+        cout << "o numero e impar" << endl;
+    }
+}
+
+3. #include <iostream>
+using namespace std;
+
+int somaIntervalo(int num1, int num2){
+    if (num1 > num2){
+        int temp = num1;
+        num1 = num2;
+        num2 = temp;
+    }
+
+    int soma = 0;
+    cout << "o intervalo e: ";
+    for (int i = num1; i <= num2; i++){
+        soma += i;
+        cout << i;
+        if (i != num2){
+            cout << " + ";
+        }
+    }
+
+    cout << endl;
+    return soma;
+}
+
+int main(){
+    int num1, num2;
+    
+    cout << "digite o primeiro numero inteiro positivo: ";
+    cin >> num1;
+    cout << "digite o segundo numero inteiro positivo: ";
+    cin >> num2;
+    
+    int resultado = somaIntervalo(num1, num2);
+
+    cout << "resultado: " << resultado << endl;
+    
+    return 0;
+}
+
+4. #include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+float esfera(float raio);
+
+int main(){
+    float raio;
+    cout << "insira o raio: ";
+    cin >> raio;
+    cout << "o volume da esfera e: "
+         << fixed << setprecision(2)
+         << esfera(raio) << endl;
+}
+
+float esfera(float raio){
+    float pi= M_PI,esfera;
+    esfera = pi * 4 * (raio*raio*raio)/3;
+    return esfera;
+}
+
+5. #include <iostream>
+using namespace std;
+
+int fatorial(int numero){
+    int resultado = numero;
+    for (int i = numero - 1; i > 1; i--){
+        resultado *= i;
+    }
+    return resultado;
+}
+
+int main(){
+    int numero;
+    cin >> numero;
+    
+    int resultado = fatorial(numero);
+    cout << "Fatorial: " << resultado << endl;
+    
+    return 0;
+}
+
+6. #include <iostream>
+using namespace std;
+
+int potencia(int base, int expoente){
+    int resultado = 1;
+    while (expoente > 0){
+        resultado *= base;
+        expoente--;
+    }
+    return resultado;
+}
+
+int main(){
+    int base, expoente;
+    cin >> base;
+    cin >> expoente;
+    
+    int resultado = potencia(base, expoente);
+    cout << resultado << endl;
+    
+    return 0;
+}
