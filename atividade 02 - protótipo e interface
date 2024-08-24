@@ -1,0 +1,53 @@
+1. Linha 21: Imprime o resultado da função iniciais(aluno), que deve ser uma versão de aluno com as iniciais em maiúsculas.
+  Linha 23: Imprime o valor original de aluno, que não é alterado pela função iniciais().
+  Se substituíssemos aluno por nome, ocorreria um erro de compilação, pois nome não está declarado no escopo de main().
+
+2. Funções com Retorno: Essas funções retornam um valor ao chamador. O valor de retorno pode ser usado diretamente ou armazenado em uma variável.
+  Funções sem Retorno (void): Essas funções realizam uma ação, mas não retornam nenhum valor ao chamador. Elas são chamadas simplesmente para executar algum comportamento, sem necessidade de capturar um valor de retorno.
+  Função aleat(): Retorna um valor inteiro que está sendo usado diretamente em printf("%d", aleat()) e também armazenado na variável x com x = aleat();.
+  Função dobro(int): Recebe um inteiro como argumento e retorna o dobro desse valor. O valor retornado é armazenado em num += dobro(x); e também é usado para comparar em if (dobro(x) > dobro(aleat())).
+  Funções que recebem parâmetros: dobro(int) e mostra_dobro(int) são exemplos de funções que requerem argumentos (valores de entrada). Esses parâmetros permitem que as funções trabalhem com dados fornecidos no momento da chamada.
+  Funções sem parâmetros: bom_dia() e aleat() não recebem nenhum argumento, ou seja, elas não precisam de informações externas para executar suas tarefas.
+
+#include <iostream>
+#include <cstdlib> 
+#include <ctime>  
+using namespace std;
+
+void bom_dia(){
+    cout << "bom dia!" << endl;
+}
+
+int aleat(){
+    return rand()%101;
+}
+
+int dobro(int num){
+    return num*2;
+}
+
+void mostra_dobro(int num){
+    cout << "o dobro de " << num << " e " << dobro(num) << endl;
+}
+
+int main(){
+    srand(time(0)); 
+
+    int x, num=0; 
+ 
+    bom_dia();
+    
+    cout << aleat() << endl;
+    
+    x=aleat(); 	 
+    
+    num+=dobro(x);
+
+    if (dobro(x) > dobro(aleat())){
+        mostra_dobro(x);
+    }
+    
+    return 0;
+}
+
+3. 
