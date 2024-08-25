@@ -50,4 +50,83 @@ int main(){
     return 0;
 }
 
-3. 
+3. rand(): Gera números pseudoaleatórios.
+  srand(seed): Define a semente para o gerador de números aleatórios.
+  atoi(str): Converte uma string para um número inteiro.
+
+4. #include <iostream>
+using namespace std;
+
+int global = 10;
+
+void demonstrateScopes(){
+    int local = 20;
+    
+    cout << "valor inicial da variavel global (fora do bloco): " << global << endl;
+    cout << "valor da variavel local (fora do bloco): " << local << endl;
+    
+    if (true){
+        int bloco = 30;
+        global = 50;
+        
+        cout << "valor da variavel global (dentro do bloco): " << global << endl;
+        cout << "valor da variavel local (dentro do bloco): " << local << endl;
+        cout << "valor da variavel de bloco: " << bloco << endl;
+    }
+
+    cout << "valor da variavel global (apos o bloco): " << global << endl;
+    cout << "valor da variavel local (apos o bloco): " << local << endl;
+}
+
+int main(){
+    cout << "valor inicial da variavel global (no main): " << global << endl;
+    
+    demonstrateScopes();
+    
+    cout << "valor da variavel global (apos a função): " << global << endl;
+
+    return 0;
+}
+
+5. #include <iostream>
+using namespace std;
+
+double calcularAreaRetangulo(double comprimento, double largura);
+
+int main(){
+    double comprimento, largura;
+
+    cout << "digite o comprimento do retangulo: ";
+    cin >> comprimento;
+    cout << "digite a largura do retangulo: ";
+    cin >> largura;
+
+    double area = calcularAreaRetangulo(comprimento, largura);
+    cout << "a area do retangulo e: " << area << endl;
+
+    return 0;
+}
+
+double calcularAreaRetangulo(double comprimento, double largura){
+    return comprimento*largura;
+}
+
+6. #include <iostream>
+#include <cstdlib> 
+#include <ctime>  
+using namespace std;
+
+int gerarNumeroAleatorio();
+
+int main(){
+    srand(time(0));
+
+    int numero = gerarNumeroAleatorio();
+    cout << "numero aleatorio entre 1 e 100: " << numero << endl;
+
+    return 0;
+}
+
+int gerarNumeroAleatorio(){
+    return rand()%100+1; 
+}
