@@ -1,0 +1,38 @@
+A.
+1. linha 4: 5
+  linha 5: 0x62ff08
+
+2. linha 4: 62ff1c
+  linha 5: 62ff18
+  linha 6: 62ff17
+
+3. linha 6: 55
+  linha 7: 0062FF14
+  linha 8: 55
+
+B.
+1. e
+
+2. c
+
+3. i = *pti; usa o ponteiro pti para acessar o valor da variável para a qual ele aponta.
+
+C. 5. pti tem valor 10.
+
+D. #include <iostream>
+using namespace std;
+
+int main (){
+    float* fp;
+    float numero1=7.3;
+    fp=&numero1;
+    cout << "valor apontado por fp: " << *fp << endl;
+
+    float numero2=*fp;
+    cout << "valor de numero 2: " << numero2 << endl;
+    cout << "endereco de numero 1: " << &numero1 << endl;
+    cout << "endereco armazenado em fp: " << fp << endl;
+
+    return 0;
+}
+Os valores são iguais.
