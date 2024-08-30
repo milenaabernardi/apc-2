@@ -1,1 +1,30 @@
+A.
+1. linha 2: 1 2 3
+  linha 6: 101 102 103
+  linha 12: 1 2 3
+
+2. linha 2: 1 2 3
+  linha 6: 101 102 103
+  linha 12: 101 102 103
+
+3. linha 7: 0 5
+  linha 9: 5 5
+
+4. linha 11: 2 4 6
+  linha 13: 2 4 6 
+  linha 14: 2 4 6
+  linha 16: 0 0 0
+
+5. linha 3: 11
+  linha 9: 11
+
+6. linha 4: 8
+  linha 5: 7
+  linha 11: 8 
+  linha 12: 2
+
+7. entrada: 2 3
+  saída: 5
+
+B. é possível fazer a leitura da variável 'z', porque o ponteiro 'pz' está apontando para 'z' e o 'scanf' está usando o ponteiro para armazenar o valor lido na variável 'z'.
 
