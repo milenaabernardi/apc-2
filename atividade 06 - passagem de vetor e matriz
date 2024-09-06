@@ -1,0 +1,51 @@
+A.
+1. #include <iostream>
+using namespace std;
+
+void ordenar(int &a, int &b){
+    if (a > b){
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+}
+
+int main (){
+    int a, b;
+    
+    cout << "digite dois valores inteiros: " << endl;
+    cin >> a >> b;
+
+    ordenar(a, b);
+
+    cout << "valores ordenados: " << endl;
+    cout << "a = " << a << " " << endl;
+    cout << "b = " << b << " " << endl;
+
+    return 0;
+}
+
+2. #include <iostream>
+using namespace std;
+
+void decomposeDouble(double x, int* int_part, double* frac_part){
+    *int_part = (int) x;
+
+    *frac_part = x - *int_part;
+}
+
+int main (){
+    double x = 123.456;
+    int int_part;
+    double frac_part;
+
+    decomposeDouble(x, &int_part, &frac_part);
+
+    cout << "numero original: " << x << endl;
+    cout << "parte inteira: " << int_part << endl;
+    cout << "parte fracionaria: " << frac_part << endl;
+
+    return 0;
+}
+
+B. 
