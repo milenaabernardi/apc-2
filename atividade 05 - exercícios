@@ -1,0 +1,151 @@
+1. #include <iostream>
+using namespace std;
+
+int multiplicarValor(int a, int b);
+
+int main (){
+    int x = 8, y = 2, resultado;
+    resultado = multiplicarValor(x, y);
+    cout << resultado << endl;
+}
+
+int multiplicarValor(int a, int b){
+    int mult;
+    mult = a*b;
+    return mult;
+}
+
+2. #include <iostream>
+using namespace std;
+
+int multiplicarReferencia(int (*a), int (*b));
+
+int main (){
+    int x = 8, y = 2, resposta;
+    resposta = multiplicarReferencia(&x, &y);
+    cout << resposta << endl;
+}
+
+int multiplicarReferencia(int (*a), int (*b)){
+    int mult;
+    mult = (*a) * (*b);
+    return mult;
+}
+
+3. #include <iostream>
+using namespace std;
+
+int somaValor(int a);
+
+int main (){
+    int x = 4, resultado;
+    resultado = somaValor(x);
+    cout << resultado << endl;
+}
+
+int somaValor(int a){
+    int somar;
+    somar = a + 10;
+    return somar;
+}
+
+4. #include <iostream>
+using namespace std;
+
+int somaReferencia(int (*a));
+
+int main (){
+    int x = 4, resultado;
+    resultado = somaReferencia(&x);
+    cout << resultado << endl;
+}
+
+int somaReferencia(int (*a)){
+    int somar;
+    somar = (*a) + 10;
+    return somar;
+}
+
+5. #include <iostream>
+using namespace std;
+
+int subtrairValor(int a);
+
+int main (){
+    int x = 2, resposta;
+    resposta = subtrairValor(x);
+    cout << resposta << endl;
+}
+
+int subtrairValor(int a){
+    int diminuir;
+    diminuir = a - 5;
+    return diminuir;
+}
+
+6. #include <iostream>
+using namespace std;
+
+int subtrairReferencia(int (*a));
+
+int main (){
+    int x = 2, resposta;
+    resposta = subtrairReferencia(&x);
+    cout << resposta << endl;
+}
+
+int subtrairReferencia(int (*a)){
+    int diminuir;
+    diminuir = (*a) - 5;
+    return diminuir;
+}
+
+7. #include <iostream>
+using namespace std;
+
+const int tamanhoVetor = 5;
+
+void inverterVetor(int* vetor, int tamanho);
+
+int main (){
+    int vetor[tamanhoVetor] = {1, 2, 3, 4, 5};
+    inverterVetor(vetor, tamanhoVetor);
+
+    for (int i = 0; i < tamanhoVetor; i++){
+        cout << vetor[i] << " ";
+    }
+    cout << endl;
+}
+
+void inverterVetor(int* vetor, int tamanho){
+    int* inicio = vetor;
+    int* fim = vetor + tamanho - 1;
+    while (inicio < fim) {
+        int temp = *inicio;
+        *inicio = *fim;
+        *fim = temp;
+        inicio++;
+        fim--;
+    }
+}
+
+8. #include <iostream>
+using namespace std;
+
+void converterLetras(string &palavra);
+
+int main (){
+    string string;
+    cout << "digite uma string: ";
+    cin >> string;
+    converterLetras(string);
+    cout << string << endl;
+}
+
+void converterLetras(string &palavra){
+    for (char &c : palavra){
+        if (c >= 'a' && c <= 'z'){
+            c = c - 32;
+        }
+    }
+}
