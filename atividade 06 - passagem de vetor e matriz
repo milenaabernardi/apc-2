@@ -48,4 +48,119 @@ int main (){
     return 0;
 }
 
-B. 
+B. a função retornará 'false' no primeiro elemento que encontrar que não seja zero.
+
+C.
+1. int maiorValor(int a[], int n){
+    int maior = a[0];
+    for (int i = 1; i < n; i++){
+        if (a[i] > maior){
+            maior = a[i];
+        }
+    }
+    return maior;
+}
+
+2. double mediaValores(int a[], int n){
+    int soma = 0;
+    for (int i = 0; i < n; i++){
+        soma += a[i];
+    }
+    return static_cast<double>(soma)/n;
+}
+
+3. int contarPositivos(int a[], int n){
+    int contagem = 0;
+    for (int i = 0; i < n; i++){
+        if (a[i] > 0){
+            contagem++;
+        }
+    }
+    return contagem;
+}
+
+4. void inserirValores(int a[], int n){
+    for (int i = 0; i < n; i++){
+        cout << "digite o valor para a posicao " << i << ": " << endl;
+        cin >> a[i] << endl;
+    }
+}
+
+void mostrarVetor(int a[], int n){
+    cout << "valores no vetor: " << endl;
+    for (int i = 0; i < n; i++){
+        cout << a[i] << " " << endl;
+    }
+    cout << endl;
+}
+
+5. void encontrarMaiorMenor(int a[], int n, int &maior, int &menor){
+    maior = a[0];
+    menor = a[0];
+    for (int i = 1; i < n; i++){
+        if (a[i] > maior){
+            maior = a[i];
+        }
+        if (a[i] < menor){
+            menor = a[i];
+        }
+    }
+}
+
+
+#include <iostream>
+
+int maiorValor(int a[], int n);
+double mediaValores(int a[], int n);
+int contarPositivos(int a[], int n);
+void inserirValores(int a[], int n);
+void mostrarVetor(int a[], int n);
+void encontrarMaiorMenor(int a[], int n, int &maior, int &menor);
+
+int main(){
+    int n;
+
+    cout << "digite o tamanho do vetor: " << endl;
+    cin >> n << endl;
+
+    int vetor[n];
+    
+    inserirValores(vetor, n);
+    mostrarVetor(vetor, n);
+
+    int maior = maiorValor(vetor, n);
+    cout << "maior valor no vetor: " << maior << endl;
+
+    double media = mediaValores(vetor, n);
+    cout << "media dos valores no vetor: " << media << endl;
+
+    int positivos = contarPositivos(vetor, n);
+    cout << "numero de valores positivos no vetor: " << positivos << endl;
+
+    int maiorNum, menorNum;
+    encontrarMaiorMenor(vetor, n, maiorNum, menorNum);
+    cout << "maior valor: " << maiorNum << endl;
+    cout << "nenor valor: " << menorNum << endl;
+
+    return 0;
+}
+
+D.
+6. a = 3, b = 5, e c = 15
+    iteraração de 5 até 15.
+    os múltiplos de 3 são: 6, 9, 12, e 15.
+    a soma desses múltiplos é 6+9+12+15=42.
+    o programa imprimirá: A soma --> 42
+
+7. 2025
+    n1 = 20 (dois primeiros dígitos).
+    n2 = 25 (dois últimos dígitos).
+    s = 20 + 25 = 45.
+    45 * 45 = 2025
+    como é verdade, a função verifica retorna 1.
+    Numero --> 2025 possui a caracteristica
+
+8. Entrada: 6
+    Divisores de 6: 1, 2, 3, 6.
+    q começa em 2 (para 1 e 6), depois é incrementado para 3 (divisor 2) e para 4 (divisor 3).
+    Saída: nr --> 6 possui 4 divisores
