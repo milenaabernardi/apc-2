@@ -1,0 +1,258 @@
+A. #include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+struct Horario {
+    int hora;
+    int minuto;
+};
+
+struct Data {
+    int dia;
+    int mes;
+    int ano;
+};
+
+struct Compromisso {
+    Data data;
+    Horario horario;
+    string descricao;
+};
+
+void mostrarCompromisso(const Compromisso& compromisso){
+    cout << "Data: " << compromisso.data.dia << "/"
+         << compromisso.data.mes << "/" << compromisso.data.ano << endl;
+    cout << "Hora: " << compromisso.horario.hora << ":"
+         << (compromisso.horario.minuto < 10 ? "0" : "") 
+         << compromisso.horario.minuto << endl;
+    cout << "Descricao: " << compromisso.descricao << endl;
+}
+
+void adicionarCompromisso(vector<Compromisso>& agenda){
+    Compromisso compromisso;
+    
+    cout << "Digite o dia do compromisso: ";
+    cin >> compromisso.data.dia;
+    cout << "Digite o mes do compromisso: ";
+    cin >> compromisso.data.mes;
+    cout << "Digite o ano do compromisso: ";
+    cin >> compromisso.data.ano;
+
+    cout << "Digite a hora do compromisso: ";
+    cin >> compromisso.horario.hora;
+    cout << "Digite os minutos do compromisso: ";
+    cin >> compromisso.horario.minuto;
+
+    cout << "Digite a descricao do compromisso: ";
+    cin.ignore();
+    getline(cin, compromisso.descricao);
+
+    agenda.push_back(compromisso);
+    cout << "Compromisso adicionado com sucesso!" << endl;
+}
+
+void listarCompromissos(const vector<Compromisso>& agenda){
+    if (agenda.empty()){
+        cout << "Agenda vazia!" << endl;
+    } else {
+        for (const auto& compromisso : agenda){
+            mostrarCompromisso(compromisso);
+            cout << "----------------------------" << endl;
+        }
+    }
+}
+
+int main(){
+    vector<Compromisso> agenda;
+    int opcao;
+
+    do {
+        cout << "\nMenu da Agenda:\n";
+        cout << "1. Adicionar compromisso\n";
+        cout << "2. Listar compromissos\n";
+        cout << "3. Sair\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+
+        switch (opcao) {
+            case 1:
+                adicionarCompromisso(agenda);
+                break;
+            case 2:
+                listarCompromissos(agenda);
+                break;
+            case 3:
+                cout << "Saindo da agenda..." << endl;
+                break;
+            default:
+                cout << "Opcao invalida!" << endl;
+                break;
+        }
+    } while (opcao != 3);
+
+    return 0;
+}
+
+B. #include <iostream>
+using namespace std;
+
+struct Vetor {
+    float x;
+    float y;
+    float z;
+};
+
+Vetor somarVetores(const Vetor& v1, const Vetor& v2){
+    Vetor resultado;
+    resultado.x = v1.x + v2.x;
+    resultado.y = v1.y + v2.y;
+    resultado.z = v1.z + v2.z;
+    return resultado;
+}
+
+void imprimirVetor(const Vetor& v){
+    cout << "Vetor: (" << v.x << ", " << v.y << ", " << v.z << ")" << endl;
+}
+
+int main(){
+    Vetor v1, v2;
+
+    cout << "Digite as coordenadas do primeiro vetor (x, y, z): ";
+    cin >> v1.x >> v1.y >> v1.z;
+
+    cout << "Digite as coordenadas do segundo vetor (x, y, z): ";
+    cin >> v2.x >> v2.y >> v2.z;
+
+    Vetor resultado = somarVetores(v1, v2);
+
+    cout << "A soma dos vetores e: ";
+    imprimirVetor(resultado);
+
+    return 0;
+}
+
+C. 1 e 2.
+#include <iostream>
+using namespace std;
+
+struct NumeroComplexo {
+    float parteReal;
+    float parteImaginaria;
+};
+
+NumeroComplexo somar(NumeroComplexo z, NumeroComplexo w){
+    NumeroComplexo resultado;
+    resultado.parteReal = z.parteReal + w.parteReal;
+    resultado.parteImaginaria = z.parteImaginaria + w.parteImaginaria;
+    return resultado;
+}
+
+NumeroComplexo subtrair(NumeroComplexo z, NumeroComplexo w){
+    NumeroComplexo resultado;
+    resultado.parteReal = z.parteReal - w.parteReal;
+    resultado.parteImaginaria = z.parteImaginaria - w.parteImaginaria;
+    return resultado;
+}
+
+NumeroComplexo multiplicar(NumeroComplexo z, NumeroComplexo w){
+    NumeroComplexo resultado;
+    resultado.parteReal = (z.parteReal * w.parteReal) - (z.parteImaginaria * w.parteImaginaria);
+    resultado.parteImaginaria = (z.parteReal * w.parteImaginaria) + (z.parteImaginaria * w.parteReal);
+    return resultado;
+}
+
+void imprimirNumeroComplexo(const NumeroComplexo& z){
+    cout << z.parteReal << (z.parteImaginaria >= 0 ? " + " : " ") 
+         << z.parteImaginaria << "i" << endl;
+}
+
+int main(){
+    NumeroComplexo z, w;
+
+    cout << "Digite a parte real do numero complexo z: ";
+    cin >> z.parteReal;
+    cout << "Digite a parte imaginaria do numero complexo z: ";
+    cin >> z.parteImaginaria;
+
+    cout << "Digite a parte real do numero complexo w: ";
+    cin >> w.parteReal;
+    cout << "Digite a parte imaginaria do numero complexo w: ";
+    cin >> w.parteImaginaria;
+
+    NumeroComplexo soma = somar(z, w);
+    NumeroComplexo subtracao = subtrair(z, w);
+    NumeroComplexo produto = multiplicar(z, w);
+
+    cout << "Soma: ";
+    imprimirNumeroComplexo(soma);
+    cout << "Subtracao: ";
+    imprimirNumeroComplexo(subtracao);
+    cout << "Produto: ";
+    imprimirNumeroComplexo(produto);
+
+    return 0;
+}
+
+D. #include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+struct Carta {
+    string naipe;
+    string valor;
+};
+
+vector<Carta> criarBaralho(){
+    vector<Carta> baralho;
+    string naipes[] = {"Copas", "Ouros", "Paus", "Espadas"};
+    string valores[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+
+    for (const string& naipe : naipes){
+        for (const string& valor : valores){
+            baralho.push_back({naipe, valor});
+        }
+    }
+
+    return baralho;
+}
+
+void embaralharBaralho(vector<Carta>& baralho){
+    srand(static_cast<unsigned int>(time(0)));
+    for (size_t i = 0; i < baralho.size(); i++){
+        size_t j = rand() % baralho.size();
+        swap(baralho[i], baralho[j]);
+    }
+}
+
+void distribuirCartas(const vector<Carta>& baralho, vector<Carta>& jogador1, vector<Carta>& jogador2){
+    for (size_t i = 0; i < 5; i++){
+        jogador1.push_back(baralho[i]);
+        jogador2.push_back(baralho[i + 5]);
+    }
+}
+
+void mostrarCartas(const vector<Carta>& jogador, int numeroJogador){
+    cout << "Jogador " << numeroJogador << " cartas:" << endl;
+    for (const Carta& carta : jogador) {
+        cout << carta.valor << " de " << carta.naipe << endl;
+    }
+    cout << endl;
+}
+
+int main(){
+    vector<Carta> baralho = criarBaralho();
+    vector<Carta> jogador1;
+    vector<Carta> jogador2;
+
+    embaralharBaralho(baralho);
+
+    distribuirCartas(baralho, jogador1, jogador2);
+
+    mostrarCartas(jogador1, 1);
+    mostrarCartas(jogador2, 2);
+
+    return 0;
+}
