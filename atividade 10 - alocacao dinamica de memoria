@@ -1,0 +1,183 @@
+A. #include <iostream>
+#include <vector>
+using namespace std;
+
+void insert_numbers(vector<int>& v, int n){
+    for (int i = 0; i < n; i++) {
+        v.push_back(i);
+    }
+}
+
+void print_vector(const vector<int>& v){
+    for (int num : v) {
+        cout << num << " ";
+    }
+    cout << endl;
+}
+
+int main(){
+    int n;
+    cout << "insira o numero de elementos: ";
+    cin >> n;
+
+    vector<int>* v = new vector<int>();
+    insert_numbers(*v, n);
+    print_vector(*v);
+
+    delete v;
+
+    return 0;
+}
+
+B. #include <iostream>
+using namespace std;
+
+void inserirElementos(int *vetor, int tamanho){
+    int *ptr;
+
+    cout << "digite os elementos do vetor: " << endl;
+    for(ptr = vetor; ptr < vetor + tamanho; ptr++){
+        cin >> *ptr;
+    }
+}
+
+void imprimirElementos(int *vetor, int tamanho){
+    int *ptr;
+
+    cout << "elementos do vetor: " << endl;
+    for(ptr = vetor; ptr < vetor + tamanho; ptr++){
+        cout << *ptr << " ";
+    }
+    cout << endl;
+}
+
+int main(){
+    int tamanho;
+
+    cout << "digite o tamanho do vetor: ";
+    cin >> tamanho;
+
+    int vetor[tamanho];
+
+    inserirElementos(vetor, tamanho);
+    imprimirElementos(vetor, tamanho);
+
+    return 0;
+}
+
+C. #include <iostream>
+#include <vector>
+using namespace std;
+
+void leituraNotas(vector<double>& notas, int quantidadeAlunos){
+    for (int i = 0; i < quantidadeAlunos; i++){
+        cout << "digite a nota do aluno(a) " << i + 1 << ": ";
+        cin >> notas[i];
+    }
+}
+
+double calculaMedia(vector<double>& notas, int quantidadeAlunos){
+    double soma = 0;
+    for (int i = 0; i < quantidadeAlunos; i++){
+        soma += notas[i];
+    }
+    return soma / quantidadeAlunos;
+}
+
+int main(){
+    int quantidadeAlunos;
+
+    cout << "digite a quantidade de alunos da turma: ";
+    cin >> quantidadeAlunos;
+
+    vector<double> notas(quantidadeAlunos);
+
+    leituraNotas(notas, quantidadeAlunos);
+
+    double media = calculaMedia(notas, quantidadeAlunos);
+
+    cout << "a media aritmetica das notas e: " << media << endl;
+
+    return 0;
+}
+
+D. #include <iostream>
+using namespace std;
+
+void leitura(float *notas, int quantidadeAlunos){
+    float *ptrNotas = notas;
+    for (int i = 0; i < quantidadeAlunos; i++){
+        cout << "digite a nota do aluno(a) " << i + 1 << ": ";
+        cin >> *ptrNotas;
+        ptrNotas++;
+    }
+}
+
+float media(float *notas, int quantidadeAlunos){
+    float *ptrNotas = notas, soma = 0;
+    for (int i = 0; i < quantidadeAlunos; i++){
+        soma += *ptrNotas;
+        ptrNotas++;
+    }
+    return soma / quantidadeAlunos;
+}
+
+int main(){
+    int quantidadeAlunos;
+    cout << "digite a quantidade de alunos: ";
+    cin >> quantidadeAlunos;
+
+    float *notas = new float[quantidadeAlunos];
+    leitura(notas, quantidadeAlunos);
+
+    cout << "media: " << media(notas, quantidadeAlunos) << endl;
+
+    delete[] notas;
+    return 0;
+}
+
+E. #include <iostream>
+using namespace std;
+
+struct Aluno{
+    string nome;
+    string serie;
+    float nota;
+};
+
+void leitura(Aluno *alunos, int quantidadeAlunos){
+    Aluno *ptrAlunos = alunos;
+    for (int i = 0; i < quantidadeAlunos; i++){
+        cout << "digite o nome do aluno(a) " << i + 1 << ": ";
+        cin >> ptrAlunos->nome;
+        cout << "digite a serie do aluno(a) " << i + 1 << ": ";
+        cin >> ptrAlunos->serie;
+        cout << "digite a nota do aluno(a) " << i + 1 << ": ";
+        cin >> ptrAlunos->nota;
+        ptrAlunos++;
+    }
+}
+
+float media(Aluno *alunos, int quantidadeAlunos){
+    Aluno *ptrAlunos = alunos;
+    float soma = 0;
+    for (int i = 0; i < quantidadeAlunos; i++){
+        soma += ptrAlunos->nota;
+        ptrAlunos++;
+    }
+    return soma / quantidadeAlunos;
+}
+
+int main(){
+    int quantidadeAlunos;
+    cout << "digite a quantidade de alunos: ";
+    cin >> quantidadeAlunos;
+
+    Aluno *alunos = new Aluno[quantidadeAlunos];
+    leitura(alunos, quantidadeAlunos);
+
+    cout << "media: " << media(alunos, quantidadeAlunos) << endl;
+
+    delete[] alunos;
+    return 0;
+}
