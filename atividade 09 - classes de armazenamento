@@ -1,0 +1,190 @@
+1. #include <iostream>
+using namespace std;
+
+int main(){
+    int numero = 10;
+    int* ponteiro = &numero;
+    
+    cout << "valor da variavel: " << *ponteiro << endl;
+    
+    ponteiro++;
+    
+    cout << "valor da variavel depois de incrementar o ponteiro: " << *ponteiro << endl;
+    
+    ponteiro--;
+    
+    cout << "valor da variavel depois de decrementar o ponteiro: " << *ponteiro << endl;
+
+    return 0;
+}
+
+2. #include <iostream>
+using namespace std;
+
+int main(){
+    int a = 5;
+    int* ptr = &a;
+    const int b = 3;
+    
+    cout << "valor original do ponteiro: " << *ptr << endl; 
+    
+    *ptr += b;
+    
+    cout << "valor do ponteiro apos adicao da constante: " << *ptr << endl;
+
+    return 0;
+}
+
+3. #include <iostream>
+using namespace std;
+
+int main(){
+    int a = 10;
+    int* ptr = &a;
+    const int b = 5;
+
+    *ptr -= b;
+
+    cout << "o valor de 'a' apos a subtracao e: " << *ptr << endl;
+
+    return 0;
+}
+
+4. #include <iostream>
+using namespace std;
+
+int main(){
+    int var1 = 10;
+    int var2 = 20;
+
+    int* ponteiro1 = &var1;
+    int* ponteiro2 = &var2;
+
+    if (ponteiro1 != ponteiro2){
+        int diferenca = (ponteiro2 - ponteiro1) / sizeof(int);
+        cout << "a diferenca entre os dois ponteiros e: " << diferenca << endl;
+    } else{
+        cout << "os dois ponteiros apontam para o mesmo endereco. nao podemos realizar a subtracao." << endl;
+    }
+
+    return 0;
+}
+
+5. #include <iostream>
+using namespace std;
+
+int main(){
+    int num1 = 10, num2 = 20;
+    int *ponteiro1 = &num1, *ponteiro2 = &num2;
+
+    cout << "ponteiro1 = " << ponteiro1 << endl;
+    cout << "ponteiro2 = " << ponteiro2 << endl;
+
+    if(ponteiro1 == ponteiro2)
+        cout << "ponteiro1 e ponteiro2 apontam para o mesmo endereco de memoria" << endl;
+    else
+        cout << "ponteiro1 e ponteiro2 apontam para enderecos diferentes de memoria" << endl;
+
+    if(*ponteiro1 == *ponteiro2)
+        cout << "ponteiro1 e ponteiro2 sao iguais" << endl;
+    else
+        cout << "ponteiro1 e ponteiro2 sao diferentes" << endl;
+
+    return 0;
+}
+
+6. #include <iostream>
+using namespace std;
+
+void funcaoEstatica(){
+    static int valorEstatico = 0;
+    valorEstatico++;
+    cout << "o valor da variavel estatica" << valorEstatico << " e: " << valorEstatico << endl;
+}
+
+int main(){
+    for(int i = 0; i < 5; i++){
+        funcaoEstatica();
+    }
+    return 0;
+}
+
+7. #include <iostream>
+#include "extern.cpp"
+using namespace std;
+
+double a = 12.0;
+extern void troca();
+
+int main(){
+cout << "Inicialmente: " << a << endl;
+troca();
+}
+#include <iostream>
+using namespace std;
+
+extern double a;
+
+void troca(){
+a = 376453.0/19.0;
+cout << "Apos a troca: " << a << endl;
+}
+
+8. #include <iostream>
+using namespace std;
+
+struct var_registro {
+    int valor;
+};
+
+void incrementa_valor(var_registro &vr){
+    vr.valor++;
+}
+
+int main(){
+    var_registro registro;
+    registro.valor = 0;
+
+    for (int i = 0; i < 10; i++){
+        incrementa_valor(registro);
+        cout << "valor apos chamada " << i+1 << ": " << registro.valor << endl;
+    }
+
+    return 0;
+}
+
+9. #include <iostream>
+using namespace std;
+
+int main(){
+    int arr[] = {10, 20, 30, 40, 50};
+    int* ptr = arr;
+
+    for (int i = 0; i < 5; i++) {
+        cout << *ptr << endl;
+        ptr++;
+    }
+
+    return 0;
+}
+
+10. #include <iostream>
+using namespace std;
+
+int main(){
+    int a = 10;
+    int b = 20;
+
+    int *p1 = &a;
+    int *p2 = &b;
+
+    if(p1 > p2){
+        cout << "a variavel em um endereco de memoria mais alto e: " << a << endl;
+    } else if(p1 < p2){
+        cout << "a variavel em um endereco de memoria mais alto e: " << b << endl;
+    } else{
+        cout << "os enderecos dos ponteiros sao iguais. verifique novamente." << endl;
+    }
+
+    return 0;
+}
