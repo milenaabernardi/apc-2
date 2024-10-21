@@ -1,0 +1,64 @@
+1. a) A eficiência de tempo de um algoritmo refere-se à quantidade de tempo que um algoritmo leva para ser executado. Isso é frequentemente expresso em termos de uma função que relaciona o tamanho do problema com o tempo de execução. A menor complexidade de tempo possível é a O(1), onde o tempo de execução é constante, independentemente do tamanho do problema. A maior complexidade de tempo possível é a O(n^2), onde o tempo de execução é proporcional ao quadrado do tamanho do problema.
+
+  b) A eficiência de tempo de um algoritmo pode ser influenciada por várias grandezas físicas, como a velocidade do processador, a capacidade de memória e a latência do disco. No entanto, na prática, os programadores geralmente se concentram na complexidade de tempo em termos de funções que relacionam o tamanho do problema com o tempo de execução.
+
+  c) Na prática, os programadores realmente utilizam a eficiência de tempo de um algoritmo para expressar a complexidade de tempo. A eficiência de tempo de um algoritmo é expressa em termos de complexidade de tempo, como O(1), O(n), O(n log n) ou O(n^2). Essas complexidades são expressas usando a notação big-O, que descreve um limite superior assintótico de uma função.
+
+  d) No modelo de computação, os programadores abstraem muitos detalhes da máquina, como a velocidade do processador, a capacidade da memória e a latência do disco. Essa abstração é feita para simplificar a análise e o projeto de algoritmos, permitindo que os programadores se concentrem nas características essenciais do algoritmo, como sua complexidade de tempo e espaço.
+
+  e) Na prática, a notação big-O é amplamente utilizada para expressar a complexidade de tempo de um algoritmo. Essa notação permite que os programadores comparem a eficiência de diferentes algoritmos em termos de complexidade de tempo, independentemente das particularidades de implementação de cada algoritmo.
+  Exemplo de análise de complexidade de tempo em termos de notação big-O: 
+  Suponha que tenhamos dois algoritmos, A e B, para resolver um problema. O algoritmo A possui uma complexidade de tempo de O(n), enquanto o algoritmo B possui uma complexidade de tempo de O(n^2). Neste caso, podemos concluir que o algoritmo A é mais eficiente em termos de tempo do que o algoritmo B, pois o crescimento da complexidade de tempo do algoritmo A é menor do que o do algoritmo B.
+
+
+2. A Notação-Big-Oh é uma forma de se descrever a complexidade de tempo de um algoritmo, expressando a quantidade de tempo necessária para que ele seja executado em relação ao tamanho do problema. A notação é baseada em funções matemáticas e é usada para expressar limites superiores assintóticos.
+Neste contexto, "Big-Oh" (denotado por O) é usado para descrever a complexidade assintótica de tempo de um algoritmo. Essa notação relacionada à quantidade de tempo que um algoritmo leva para ser executado em um determinado problema de tamanho n com uma função f(n). O Big-Oh expressa o limite superior assintótico da função f(n), que é a maior taxa de crescimento que a função pode ter em termos de tempo de execução.
+
+
+3. O algoritmo acima é uma prova de que, independentemente de qualquer tipo de dado ou quantidade de memória que ele consuma, a complexidade de tempo é sempre no mínimo O(n2) e no máximo O(n2*2n).
+A prova utiliza dois laços aninhados para verificar todos os modificadores possíveis de elementos na matriz x.
+A complexidade de tempo é representada pela quantidade de instruções realizadas no pior caso.
+Neste algoritmo, temos dois loops aninhados.
+O primeiro loop, com índice i, executa n vezes.
+O segundo loop, com índice j, depende do valor de i. Se for impossível, então o segundo loop é executado 2n vezes. Caso contrário, se for par, o segundo loop executa apenas n vezes.
+Como pode ser arbitrariamente grande, a complexidade de tempo de O(n2) representa o pior caso.
+Já a complexidade de tempo de O(n2*2n) representa o melhor caso, quando o segundo loop sempre é executado 2n vezes.
+Dessa forma, a complexidade de tempo desse algoritmo é O(n2).
+
+4. #include <iostream>
+#include <vector>
+using namespace std;
+
+int buscaSequencial(const vector<int>& A, int v);
+
+int main() {
+    vector<int> A = { /* Seus valores aqui */ };
+    int v;  // O número a ser procurado
+    cout << "Digite o número a ser procurado: ";
+    cin >> v;
+
+    int resultado = buscaSequencial(A, v);
+
+    if (resultado == -1) {
+        cout << "O elemento não foi encontrado." << endl;
+    } else {
+        cout << "O elemento foi encontrado no índice: " << resultado << endl;
+    }
+
+    return 0;
+}
+
+int buscaSequencial(const vector<int>& A, int v) {
+    for (int i = 0; i < A.size(); ++i) {
+        if (A[i] == v) {
+            return i;  // Elemento encontrado, retorna o índice
+        }
+    }
+    return -1;  // Elemento não encontrado
+}
+
+//Melhor caso: O elemento v está na primeira posição do vetor A, resultando em uma complexidade de tempo constante O(1).
+
+//Pior caso: O elemento v não está no vetor A ou está na última posição do vetor. Nesse caso, a busca terá que percorrer todo o vetor, resultando em uma complexidade de tempo linear O(n), onde n é o tamanho do vetor A.
+
+//Portanto, a complexidade de tempo no melhor caso é O(1) e no pior caso é O(n) para a busca sequencial.
