@@ -1,0 +1,74 @@
+1) #include <iostream>
+using namespace std;
+
+int somatoria(int n) {
+    if (n <= 1) return n;
+    return n + somatoria(n - 1);
+}
+
+int main() {
+    int n;
+    cout << "digite um numero inteiro n: ";
+    cin >> n;
+    
+    cout << "a somatoria de 1 ate " << n << " e: " << somatoria(n) << endl;
+    return 0;
+}
+
+2) #include <iostream>
+using namespace std;
+
+int contarDigitos(int num) {
+    if (num == 0) return 0;
+    return 1 + contarDigitos(num / 10);
+}
+
+int main() {
+    int num;
+    cout << "digite um numero: ";
+    cin >> num;
+
+    if (num == 0) {
+        cout << "o numero digitado tem 1 digito." << endl;
+    } else {
+        cout << "o numero digitado tem " << contarDigitos(abs(num)) << " digitos." << endl;
+    }
+    return 0;
+}
+
+3) #include <iostream>
+using namespace std;
+
+int somaPares(int x) {
+    if (x <= 0) return 0;
+    if (x % 2 == 0) return x + somaPares(x - 2);
+    else return somaPares(x - 1);
+}
+
+int main() {
+    int x;
+    cout << "digite um numero inteiro positivo X: ";
+    cin >> x;
+
+    cout << "a soma dos numeros pares de 1 ate " << x << " e: " << somaPares(x) << endl;
+    return 0;
+}
+
+4) #include <iostream>
+using namespace std;
+
+int tribonacci(int n) {
+    if (n == 0) return 0;
+    else if (n == 1) return 0;
+    else if (n == 2) return 1;
+    else return tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3);
+}
+
+int main() {
+    int N;
+    cout << "digite um numero inteiro n para obter o N-esimo numero de tribonacci: ";
+    cin >> N;
+
+    cout << "o " << N << "-esimo numero de tribonacci e: " << tribonacci(N) << endl;
+    return 0;
+}
