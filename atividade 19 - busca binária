@@ -1,0 +1,152 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// exercício 1
+int buscaSequencial(const vector<int>& v, int x){
+    for (int j = 0; j < v.size() - 1; ++j){
+        if (v[j] < x && x <= v[j + 1]){
+            return j;
+        }
+    }
+    return -1;
+}
+
+// exercício 2
+int buscaBinaria(const vector<int>& v, int x){
+    int left = 0;
+    int right = v.size() - 1;
+    while (left <= right){
+        int mid = left + (right - left) / 2;
+        
+        if(mid == 0){
+            if(x <= v[0]){
+                return 0;
+            }
+        }
+        else{
+            if (v[mid - 1] <= x && x <= v[mid]){
+                return mid;
+            }
+        }
+        
+        if (v[mid] < x){
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
+// exercício 3
+int buscaSequencialRecursiva(const vector<int>& v, int x, int j){
+    if (j >= v.size() -1){
+        return -1;
+    }
+    if (v[j] < x && x <= v[j +1]){
+        return j;
+    }
+    return buscaSequencialRecursiva(v, x, j +1);
+}
+
+// exercício 4
+int buscaBinariaModificada(const vector<int>& v, int x){
+    int left = 0;
+    int right = v.size() -1;
+    int result = -1;
+    while(left <= right){
+        int mid = left + (right - left)/2;
+        if(v[mid] >=x){
+            result = mid;
+            right = mid -1;
+        }
+        else{
+            left = mid +1;
+        }
+    }
+    return result;
+}
+
+// exercício 5
+pair<int, int> duasSoma(const vector<int>& v, int t){
+    int left =0;
+    int right = v.size()-1;
+    while(left < right){
+        int sum = v[left] + v[right];
+        if(sum == t){
+            return make_pair(left, right);
+        }
+        else if(sum < t){
+            left++;
+        }
+        else{
+            right--;
+        }
+    }
+    return make_pair(-1, -1);
+}
+
+int main(){
+    vector<int> v = {2, 3, 5, 7, 11, 13, 17, 19, 23};
+
+    // teste dos exercícios
+    int x = 6;
+
+    // exercício 1
+    cout << "Exercicio 1: Busca Sequencial\n";
+    int res1 = buscaSequencial(v, x);
+    if(res1 != -1){
+        cout << "Indice j encontrado: " << res1 << " (v[j] = " << v[res1] << ", v[j+1] = " << v[res1 +1] << ")\n\n";
+    }
+    else{
+        cout << "Nenhum indice j satisfaz a condicao.\n\n";
+    }
+
+    // exercício 2
+    cout << "Exercicio 2: Busca Binaria\n";
+    int res2 = buscaBinaria(v, x);
+    if(res2 != -1){
+        if(res2 ==0){
+            cout << "Indice j encontrado: " << res2 << " (x <= v[j] = " << v[res2] << ")\n\n";
+        }
+        else{
+            cout << "Indice j encontrado: " << res2 << " (v[j-1] = " << v[res2 -1] << ", v[j] = " << v[res2] << ")\n\n";
+        }
+    }
+    else{
+        cout << "Nenhum indice j satisfaz a condicao.\n\n";
+    }
+
+    // exercicio 3
+    cout << "Exercicio 3: Busca Sequencial Recursiva\n";
+    int res3 = buscaSequencialRecursiva(v, x, 0);
+    if(res3 != -1){
+        cout << "Indice j encontrado: " << res3 << " (v[j] = " << v[res3] << ", v[j+1] = " << v[res3 +1] << ")\n\n";
+    }
+    else{
+        cout << "Nenhum indice j satisfaz a condicao.\n\n";
+    }
+
+    // Exercicio 4
+    cout << "Exercicio 4: Busca Binaria Modificada\n";
+    int res4 = buscaBinariaModificada(v, x);
+    if(res4 != -1){
+        cout << "Menor indice onde v[j] >= x: " << res4 << " (v[j] = " << v[res4] << ")\n\n";
+    }
+    else{
+        cout << "Nenhum indice j satisfaz a condicao v[j] >= x.\n\n";
+    }
+
+    // Exercicio 5
+    cout << "Exercicio 5: Duas Soma\n";
+    pair<int, int> res5 = duasSoma(v, x);
+    if(res5.first != -1){
+        cout << "Indices i e j encontrados: i = " << res5.first << " (v[i] = " << v[res5.first] << "), j = " << res5.second << " (v[j] = " << v[res5.second] << ")\n\n";
+    }
+    else{
+        cout << "Nenhum par de indices i e j satisfaz a condicao v[i] + v[j] = " << x << ".\n\n";
+    }
+
+    return 0;
+}
