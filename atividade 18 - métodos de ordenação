@@ -1,0 +1,98 @@
+1) - Selection Sort: Esse algoritmo sempre faz O(n^2) comparações e não se beneficia de listas já ordenadas. O número de trocas é menor do que Bubble Sort, mas, devido ao alto número de comparações, ele não é eficiente para listas grandes.
+  - Bubble Sort: O melhor caso ocorre quando o array já está ordenado, resultando em complexidade O(n). No entanto, o caso médio e o pior caso são O(n^2), o que torna o algoritmo menos eficiente para grandes conjuntos de dados.
+  - Insertion Sort: Para listas que estão quase ordenadas, o Insertion Sort é bastante eficiente, com complexidade de O(n). Para casos não ordenados, porém, ele possui complexidade de O(n^2).
+  - Merge Sort: Este algoritmo de ordenação tem complexidade O(n log n) em todos os casos (melhor, médio e pior), o que o torna eficiente para grandes conjuntos de dados. Ele usa divisão e conquista, dividindo a lista ao meio repetidamente e ordenando cada metade antes de mesclá-las em uma única lista ordenada.
+
+2) Algoritmo	    Melhor Caso	        Caso Médio	      Pior Caso
+  Selection Sort	O(n^2)	            O(n^2)	          O(n^2)
+  Bubble Sort	    O(n) (já ordenado)	O(n^2)	          O(n^2)
+  Insertion Sort	O(n) (já ordenado)	O(n^2)	          O(n^2)
+  Merge Sort	    O(n log n)	        O(n log n)	      O(n log n)
+
+3) Shell Sort
+#include <iostream>
+using namespace std;
+
+void shellSort(int arr[], int n) {
+    for (int intervalo = n / 2; intervalo > 0; intervalo /= 2) {
+        for (int i = intervalo; i < n; i++) {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= intervalo && arr[j - intervalo] > temp; j -= intervalo) {
+                arr[j] = arr[j - intervalo];
+            }
+            arr[j] = temp;
+        }
+    }
+}
+
+void imprimirArray(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {12, 34, 54, 2, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    shellSort(arr, n);
+    cout << "Array ordenado com Shell Sort: ";
+    imprimirArray(arr, n);
+    return 0;
+}
+
+Passo a passo:
+- Divida a lista em sublistas com base em um valor de intervalo (gap).
+- Aplique o Insertion Sort em cada sublista.
+- Reduza o valor do intervalo e repita o processo até o intervalo ser 1, o que significa que a lista está totalmente ordenada.
+
+Heap Sort
+#include <iostream>
+using namespace std;
+
+void heapificar(int arr[], int n, int i) {
+    int maior = i;   
+    int esquerda = 2 * i + 1;
+    int direita = 2 * i + 2;
+
+    if (esquerda < n && arr[esquerda] > arr[maior])
+        maior = esquerda;
+
+    if (direita < n && arr[direita] > arr[maior])
+        maior = direita;
+
+    if (maior != i) {
+        swap(arr[i], arr[maior]);
+        heapificar(arr, n, maior);
+    }
+}
+
+void heapSort(int arr[], int n) {
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapificar(arr, n, i);
+
+    for (int i = n - 1; i > 0; i--) {
+        swap(arr[0], arr[i]);
+        heapificar(arr, i, 0);
+    }
+}
+
+void imprimirArray(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    heapSort(arr, n);
+    cout << "Array ordenado com Heap Sort: ";
+    imprimirArray(arr, n);
+    return 0;
+}
+
+Passo a passo:
+- Construa um max heap a partir dos dados não ordenados.
+- Remova o maior elemento (raiz) do heap e coloque-o na posição final do array.
+- Reduza o tamanho do heap e repita o processo até que toda a lista esteja ordenada.
