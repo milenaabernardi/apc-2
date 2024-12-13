@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm>
-#include <cstdlib>
+#include <algorithm> // ordenar os elementos do vetor
+#include <cstdlib> // limpar o terminal
 #include <windows.h> // usar o sleep
 #include <cassert> // usar o assert
 using namespace std;
