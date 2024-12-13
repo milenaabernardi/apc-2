@@ -137,6 +137,7 @@ int main() {
 }
 
 void menu() {
+    limparTela();
     cout << "\n";
     cout << "-----------------------------------------------------------";
     cout << "\n| Sistema de Gerenciamento de Acervo de Jogos Eletronicos |\n";
@@ -154,167 +155,223 @@ void menu() {
 
 // cadastrar um jogo
 void cadastrarJogo(vector<Jogo>& jogos) {
-    cout << "Cadastro de jogos\n";
-    Jogo jogo;
-    cout << "\n";
-    cout << "Nome do jogo: ";
-    getline(cin, jogo.nome);
-    cout << "Plataforma: ";
-    getline(cin, jogo.plataforma);
-    cout << "Genero: ";
-    getline(cin, jogo.genero);
-    
-    jogo.ano = lerAno();
-    
-    cout << "Popularidade (0 a 10): ";
-    jogo.popularidade = lerinteiro(); 
-    
-    while (jogo.popularidade < 0 || jogo.popularidade > 10) {
-        cout << "Popularidade deve ser entre 0 e 10. Tente novamente: ";
-        jogo.popularidade = lerinteiro();
-    }
-
-    cout << "Nota (0 a 10): ";
-    jogo.nota = lerFloat(); 
-    
-    while (jogo.nota < 0 || jogo.nota > 10) {
-        cout << "Nota deve ser entre 0 e 10. Tente novamente: ";
-        jogo.nota = lerFloat();
-    }
-
-    jogos.push_back(jogo);
-    cout << "\nJogo cadastrado com sucesso!\n";
-    pausar();
     limparTela();
+    char opcao;
+    do {
+        cout << "Cadastro de jogos\n";
+        Jogo jogo;
+        cout << "\n";
+        cout << "Nome do jogo: ";
+        getline(cin, jogo.nome);
+        cout << "Plataforma: ";
+        getline(cin, jogo.plataforma);
+        cout << "Genero: ";
+        getline(cin, jogo.genero);
+
+        jogo.ano = lerAno();
+
+        cout << "Popularidade (0 a 10): ";
+        jogo.popularidade = lerinteiro(); 
+
+        while (jogo.popularidade < 0 || jogo.popularidade > 10) {
+            cout << "Popularidade deve ser entre 0 e 10. Tente novamente: ";
+            jogo.popularidade = lerinteiro();
+        }
+
+        cout << "Nota (0 a 10): ";
+        jogo.nota = lerFloat(); 
+
+        while (jogo.nota < 0 || jogo.nota > 10) {
+            cout << "Nota deve ser entre 0 e 10. Tente novamente: ";
+            jogo.nota = lerFloat();
+        }
+
+        jogos.push_back(jogo);
+        cout << "\nJogo cadastrado com sucesso!\n";
+
+        cout << "\nDeseja cadastrar outro jogo? (S/N): ";
+        cin >> opcao;
+        cin.ignore();
+        opcao = toupper(opcao);
+    } while (opcao == 'S');
 }
 
 // buscar jogos pelo nome ou ano de lancamento
 void buscarJogo(const vector<Jogo>& jogos) {
-    cout << "\nBuscar por (1: Nome, 2: Ano): ";
-    int opcao;
-    cin >> opcao;
-    cin.ignore();
+    char opcao;
+    do {
+        cout << "\nBuscar por (1: Nome, 2: Ano): ";
+        int opcaoBusca;
+        cin >> opcaoBusca;
+        cin.ignore();
 
-    if (opcao == 1) {
-        string nome;
-        cout << "\nNome do jogo: ";
-        getline(cin, nome);
-        for (const auto& jogo : jogos) {
-            if (jogo.nome == nome) {
-                cout << "\nEncontrado: " << jogo.nome << ", " << jogo.plataforma << ", " << jogo.ano << "\n";
-                return;
+        bool jogoEncontrado = false;
+
+        if (opcaoBusca == 1) {
+            string nome;
+            cout << "\nNome do jogo: ";
+            getline(cin, nome);
+            for (const auto& jogo : jogos) {
+                if (jogo.nome == nome) {
+                    cout << "\nEncontrado: " << jogo.nome << ", " << jogo.plataforma << ", " << jogo.ano << "\n";
+                    jogoEncontrado = true;
+                    break;
+                }
+            }
+        } else if (opcaoBusca == 2) {
+            int ano;
+            // Remover a mensagem "Ano de lançamento" aqui
+            ano = lerAno(); 
+            for (const auto& jogo : jogos) {
+                if (jogo.ano == ano) {
+                    cout << "\nEncontrado: " << jogo.nome << ", " << jogo.plataforma << ", " << jogo.ano << "\n";
+                    jogoEncontrado = true; 
+                }
             }
         }
-    } else if (opcao == 2) {
-        int ano;
-        cout << "\nAno de lancamento: ";
-        ano = lerAno(); 
-        for (const auto& jogo : jogos) {
-            if (jogo.ano == ano) {
-                cout << "\nEncontrado: " << jogo.nome << ", " << jogo.plataforma << ", " << jogo.ano << "\n";
-            }
+
+        if (!jogoEncontrado) {
+            cout << "\nJogo nao encontrado.\n";
         }
-    }
-    cout << "\nJogo nao encontrado.\n";
+
+        cout << "\nDeseja voltar ao menu? (S): ";
+        cin >> opcao;
+        cin.ignore();
+    } while (opcao == 'S');
 }
 
 // ordenação os jogos por criterio
 void ordenarJogos(vector<Jogo>& jogos) {
-    cout << "\nOrdenar por (1: Nome, 2: Ano, 3: Popularidade, 4: Nota): ";
-    int criterio;
-    cin >> criterio;
-    cin.ignore();
+    char opcao;
+    do {
+        cout << "\nOrdenar por (1: Nome, 2: Ano, 3: Popularidade, 4: Nota): ";
+        int criterio;
+        cin >> criterio;
+        cin.ignore();
 
-    if (criterio == 1) {
-        sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
-            return a.nome < b.nome;
-        });
-    } else if (criterio == 2) {
-        sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
-            return a.ano < b.ano;
-        });
-    } else if (criterio == 3) {
-        sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
-            return a.popularidade > b.popularidade;
-        });
-    } else if (criterio == 4) {
-        sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
-            return a.nota > b.nota;
-        });
-    }
-    cout << "\nJogos ordenados com sucesso!\n";
+        if (criterio == 1) {
+            sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
+                return a.nome < b.nome;
+            });
+        } else if (criterio == 2) {
+            sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
+                return a.ano < b.ano;
+            });
+        } else if (criterio == 3) {
+            sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
+                return a.popularidade > b.popularidade;
+            });
+        } else if (criterio == 4) {
+            sort(jogos.begin(), jogos.end(), [](const Jogo& a, const Jogo& b) {
+                return a.nota > b.nota;
+            });
+        }
+
+        // Exibir a lista de jogos ordenados
+        cout << "\nJogos ordenados com sucesso!\n";
+        for (const auto& jogo : jogos) {
+            cout << "- " << jogo.nome << " (Ano: " << jogo.ano << ", Popularidade: " << jogo.popularidade << ", Nota: " << jogo.nota << ")\n";
+        }
+
+        cout << "\nDeseja voltar ao menu? (S): ";
+        cin >> opcao;
+        cin.ignore();
+    } while (opcao == 'S');
 }
 
 // lista todos os jogos ou permite filtrar pela sua preferência
 void listarJogos(const vector<Jogo>& jogos) {
-    cout << "\nListar por (1: Todos, 2: Nome, 3: Ano, 4: Popularidade): ";
-    int opcao;
-    cin >> opcao;
-    cin.ignore();
+    char opcao;
+    do {
+        cout << "\nListar por (1: Todos, 2: Nome, 3: Ano, 4: Popularidade, 5: Nota): ";
+        int opcaoListar;
+        cin >> opcaoListar;
+        cin.ignore();
 
-    if (opcao == 1) {
-        cout << "\nJogos cadastrados:\n";
-        for (const auto& jogo : jogos) {
-            cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ")\n";
+        if (opcaoListar == 1) {
+            cout << "\nJogos cadastrados:\n";
+            for (const auto& jogo : jogos) {
+                cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ", Nota: " << jogo.nota << ")\n";
+            }
+        } else if (opcaoListar == 2) {
+            cout << "\nJogos por nome:\n";
+            vector<Jogo> ordenados = jogos;
+            sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
+                return a.nome < b.nome;
+            });
+            for (const auto& jogo : ordenados) {
+                cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ", Nota: " << jogo.nota << ")\n";
+            }
+        } else if (opcaoListar == 3) {
+            cout << "\nJogos por ano (mais recente para mais antigo):\n";
+            vector<Jogo> ordenados = jogos;
+            sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
+                return a.ano > b.ano;
+            });
+            for (const auto& jogo : ordenados) {
+                cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ", Nota: " << jogo.nota << ")\n";
+            }
+        } else if (opcaoListar == 4) {
+            cout << "\nJogos por popularidade (maior para menor):\n";
+            vector<Jogo> ordenados = jogos;
+            sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
+                return a.popularidade > b.popularidade;
+            });
+            for (const auto& jogo : ordenados) {
+                cout << "- " << jogo.nome << " (Popularidade: " << jogo.popularidade << ", Ano: " << jogo.ano << ", Nota: " << jogo.nota << ")\n";
+            }
+        } else if (opcaoListar == 5) {
+            cout << "\nJogos por nota (maior para menor):\n";
+            vector<Jogo> ordenados = jogos;
+            sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
+                return a.nota > b.nota;
+            });
+            for (const auto& jogo : ordenados) {
+                cout << "- " << jogo.nome << " (Nota: " << jogo.nota << ", Ano: " << jogo.ano << ", Popularidade: " << jogo.popularidade << ")\n";
+            }
+        } else {
+            cout << "\nOpcao invalida.\n";
         }
-    } else if (opcao == 2) {
-        cout << "\nJogos por nome:\n";
-        vector<Jogo> ordenados = jogos;
-        sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
-            return a.nome < b.nome;
-        });
-        for (const auto& jogo : ordenados) {
-            cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ")\n";
-        }
-    } else if (opcao == 3) {
-        cout << "\nJogos por ano (mais recente para mais antigo):\n";
-        vector<Jogo> ordenados = jogos;
-        sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
-            return a.ano > b.ano;
-        });
-        for (const auto& jogo : ordenados) {
-            cout << "- " << jogo.nome << " (" << jogo.ano << ", Popularidade: " << jogo.popularidade << ")\n";
-        }
-    } else if (opcao == 4) {
-        cout << "\nJogos por popularidade (maior para menor):\n";
-        vector<Jogo> ordenados = jogos;
-        sort(ordenados.begin(), ordenados.end(), [](const Jogo& a, const Jogo& b) {
-            return a.popularidade > b.popularidade;
-        });
-        for (const auto& jogo : ordenados) {
-            cout << "- " << jogo.nome << " (Popularidade: " << jogo.popularidade << ", Ano: " << jogo.ano << ")\n";
-        }
-    } else {
-        cout << "\nOpcao invalida.\n";
-    }
+
+        cout << "\nDeseja voltar ao menu? (S): ";
+        cin >> opcao;
+        cin.ignore();
+    } while (opcao == 'S');
 }
 
 // gera um relatório recursivo por década
 void relatorioPorDecada(const vector<Jogo>& jogos, int decadaAtual) {
-    if (decadaAtual == 0) {
-        int menorAno = jogos.empty() ? 0 : jogos[0].ano;
+    char opcao;
+    do {
+        if (decadaAtual == 0) {
+            int menorAno = jogos.empty() ? 0 : jogos[0].ano;
+            for (const auto& jogo : jogos) {
+                if (jogo.ano < menorAno) menorAno = jogo.ano;
+            }
+            relatorioPorDecada(jogos, (menorAno / 10) * 10);
+            return;
+        }
+
+        vector<Jogo> daDecada;
         for (const auto& jogo : jogos) {
-            if (jogo.ano < menorAno) menorAno = jogo.ano;
+            if (jogo.ano >= decadaAtual && jogo.ano < decadaAtual + 10) {
+                daDecada.push_back(jogo);
+            }
         }
-        relatorioPorDecada(jogos, (menorAno / 10) * 10);
-        return;
-    }
 
-    vector<Jogo> daDecada;
-    for (const auto& jogo : jogos) {
-        if (jogo.ano >= decadaAtual && jogo.ano < decadaAtual + 10) {
-            daDecada.push_back(jogo);
+        if (!daDecada.empty()) {
+            cout << "\nJogos da decada de " << decadaAtual << ":\n";
+            for (const auto& jogo : daDecada) {
+                cout << "- " << jogo.nome << " (" << jogo.ano << ")\n";
+            }
         }
-    }
 
-    if (!daDecada.empty()) {
-        cout << "\nJogos da decada de " << decadaAtual << ":\n";
-        for (const auto& jogo : daDecada) {
-            cout << "- " << jogo.nome << " (" << jogo.ano << ")\n";
+        if (!daDecada.empty() || decadaAtual < 2020) {
+            relatorioPorDecada(jogos, decadaAtual + 10);
         }
-    }
 
-    if (!daDecada.empty() || decadaAtual < 2020) {
-        relatorioPorDecada(jogos, decadaAtual + 10);
-    }
+        cout << "\nDeseja voltar ao menu? (S): ";
+        cin >> opcao;
+        cin.ignore();
+    } while (opcao == 'S');
 }
